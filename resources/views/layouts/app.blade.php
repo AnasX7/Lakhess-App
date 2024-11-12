@@ -6,16 +6,18 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Lakhess | @yield('titel')</title>
-    
+        <link rel="shortcut icon" href="assets/lakhess-logo.svg" type="image/x-icon">
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-
+    <body class="antialiased font-inter">
+        <div class="min-h-screen bg-bg-primary dark:bg-bg-primary-dark">
+            @include('app.partials.sideNavigation')
+            @include('app.partials.header')
+            
             <!-- Page Content -->
-            <main>
+            <main class="pl-[18.5rem]">
                {{ $slot }}
             </main>
         </div>

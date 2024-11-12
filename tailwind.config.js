@@ -52,14 +52,14 @@ export default {
             },
             backgroundColor: {
                 "bg-primary": "#FFFFFF",
-                "bg-active": "FAFAFA",
+                "bg-active": "#FAFAFA",
                 "bg-secondry": "#FAFAFA",
                 "bg-primary-dark": "#0C0E12",
                 "bg-active-dark": "#22262F",
                 "bg-secondry-dark": "#13161B",
             },
         },
+        darkMode: "selector",
     },
-    darkMode: "selector",
     plugins: [forms, daisyui],
 };
