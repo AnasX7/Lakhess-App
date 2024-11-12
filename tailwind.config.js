@@ -60,6 +60,11 @@ export default {
             },
         },
         darkMode: "selector",
+        backgroundImage:{
+            'grid-pattern':`linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px),
+                            linear-gradient (180deg,rgba(0,0,0,0.1) 1px,transparent 1px)`
+        },
     },
+
     plugins: [forms, daisyui],
 };

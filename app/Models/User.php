@@ -22,6 +22,7 @@ class User extends AuthUser
         'name',
         'email',
         'password',
+        'avtar_img',
     ];
 
     /**
