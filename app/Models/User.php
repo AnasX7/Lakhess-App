@@ -22,7 +22,7 @@ class User extends AuthUser
         'name',
         'email',
         'password',
-        'avtar_img',
+        'avtar',
     ];
 
     /**
@@ -50,7 +50,7 @@ class User extends AuthUser
 
     public function getAvatarUrlAttribute()
     {
-        return $this->avatar_img ? asset('storage/' . $this->avatar_img) : asset('assets/user.png');
+        return $this->avatar ? asset('storage/' . $this->avatar) : asset('assets/user.png');
     }
 
 }
