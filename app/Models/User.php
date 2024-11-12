@@ -47,4 +47,10 @@ class User extends AuthUser
             'password' => 'hashed',
         ];
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatar_img ? asset('storage/' . $this->avatar_img) : asset('assets/user.png');
+    }
+
 }

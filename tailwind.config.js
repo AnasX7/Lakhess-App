@@ -52,18 +52,19 @@ export default {
             },
             backgroundColor: {
                 "bg-primary": "#FFFFFF",
-                "bg-active": "FAFAFA",
+                "bg-active": "#FAFAFA",
                 "bg-secondry": "#FAFAFA",
                 "bg-primary-dark": "#0C0E12",
                 "bg-active-dark": "#22262F",
                 "bg-secondry-dark": "#13161B",
             },
-            backgroundImage:{
-                'grid-pattern':`linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px),
-                                linear-gradient (180deg,rgba(0,0,0,0.1) 1px,transparent 1px)`
-            },
-        },    
-    },    
-    darkMode: "selector",
+        },
+        darkMode: "selector",
+        backgroundImage:{
+            'grid-pattern':`linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px),
+                            linear-gradient (180deg,rgba(0,0,0,0.1) 1px,transparent 1px)`
+        },
+    },
+
     plugins: [forms, daisyui],
 };
