@@ -22,7 +22,7 @@ class User extends AuthUser
         'name',
         'email',
         'password',
-        'avtar_img',
+        'avatar',
     ];
 
     /**
@@ -48,9 +48,41 @@ class User extends AuthUser
         ];
     }
 
+    /**
+     * Get the folders associated with the user.
+     */
+    public function folders()
+    {
+        return $this->hasMany(Folder::class);
+    }
+
+    /**
+     * Get the summaries associated with the user.
+     */
+    public function summaries()
+    {
+        return $this->hasMany(Summary::class);
+    }
+
+    /**
+     * Get the quizzes associated with the user.
+     */
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
+
+    /**
+     * Get the user's favorites (using a pivot table).
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany(Favorite::class, 'favorite_user', 'user_id', 'favorite_id');
+    }
+
     public function getAvatarUrlAttribute()
     {
-        return $this->avatar_img ? asset('storage/' . $this->avatar_img) : asset('assets/user.png');
+        return $this->avatar ? asset('avatars/' . $this->avatar) : asset('avatars/default.png');
     }
 
 }

@@ -34,7 +34,25 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('success', 'Profile updated successfully!');
+    }
+
+    /**
+     * Update the user's profile img.
+     */
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image',
+        ]);
+
+        $avatarName = time().'.'.$request->avatar->getClientOriginalExtension();
+
+        $request->avatar->move(public_path('avatars'), $avatarName);
+
+        Auth()->user()->update(['avatar'=>$avatarName]);
+        
+        return redirect()->back()->with('success', 'Avatar updated successfully!');
     }
 
     /**
@@ -57,4 +75,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }
