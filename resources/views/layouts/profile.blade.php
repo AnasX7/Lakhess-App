@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
-  <body class="antialiased font-inter">
+  <body class="antialiased font-inter dark">
     <div class="min-h-screen bg-bg-primary dark:bg-bg-primary-dark">
       @include('layouts.navigation')
 

@@ -1,12 +1,18 @@
 <nav
-  class="fixed flex h-screen w-[18.5rem] flex-col justify-between border-r-[1px] border-border-secondry bg-bg-primary px-4 pb-8 pt-6 dark:border-border-secondry-dark dark:bg-bg-primary-dark">
+  class="fixed z-50 flex h-screen w-[18.5rem] flex-col justify-between border-r-[1px] border-border-secondry bg-bg-primary px-4 pb-8 pt-6 dark:border-border-secondry-dark dark:bg-bg-primary-dark">
 
   <div class="flex flex-col gap-6">
 
     <div class="flex flex-col justify-between w-full gap-6">
-      <div class="flex items-center gap-[10px] pl-3">
-        <x-application-logo class="h-[40px] w-[40px]" />
-        <span class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
+      <div class="flex items-center justify-between px-2">
+
+        <div class="flex items-center gap-[10px]">
+          <x-application-logo class="h-[40px] w-[40px]" />
+          <span class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
+        </div>
+
+        <x-dark-mode-toggle />
+
       </div>
 
       <form action="{{ route('dashboard') }}" method="GET">
@@ -17,8 +23,10 @@
             class="w-[180px] grow border-none bg-transparent px-0 text-fg-quaternary placeholder-fg-quaternary outline-none focus:ring-0 dark:text-fg-quaternary-dark dark:placeholder-fg-quaternary-dark"
             placeholder="Search" />
           <div class="flex gap-1">
-            <kbd class="kbd kbd-sm">⌘</kbd>
-            <kbd class="kbd kbd-sm">K</kbd>
+            <kbd
+              class="kbd kbd-sm border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">⌘</kbd>
+            <kbd
+              class="kbd kbd-sm border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">K</kbd>
           </div>
         </label>
       </form>
@@ -41,7 +49,7 @@
         <li>
           <details open>
             <summary
-              class="hover:text-fg-secondary-hover dark:hover:text-fg-secondary-dark-hover hover:bg-bg-active dark:hover:bg-bg-active-dark">
+              class="font-semibold hover:text-fg-secondary-hover dark:hover:text-fg-secondary-dark-hover text-fg-secondry hover:bg-bg-active dark:text-fg-secondry-dark dark:hover:bg-bg-active-dark">
               <svg class="w-5 h-5" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -52,7 +60,7 @@
             </summary>
             <ul>
               <li>
-                <x-sidenav-link class="justify-between" href="{{ route('folder.viewAll') }}" :active="request()->routeIs('folder.viewAll')">
+                <x-sidenav-link class="justify-between" href="{{ route('summaries') }}" :active="request()->routeIs('summaries')">
                   <div class="flex items-center gap-2">
                     <svg class="w-5 h-5" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
@@ -61,11 +69,13 @@
                     </svg>
                     <span>View all</span>
                   </div>
-                  <div class="badge badge-md bg-bg-active dark:bg-bg-active-dark">0</div>
+                  <div
+                    class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
+                    0</div>
                 </x-sidenav-link>
               </li>
               <li>
-                <x-sidenav-link class="justify-between" href="{{ route('folder.favorite') }}" :active="request()->routeIs('folder.favorite')">
+                <x-sidenav-link class="justify-between" href="{{ route('favorites') }}" :active="request()->routeIs('favorites')">
                   <div class="flex items-center gap-2">
                     <svg class="w-5 h-5" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
@@ -75,9 +85,25 @@
                     </svg>
                     <span>Favorite</span>
                   </div>
-                  <div class="badge badge-md bg-bg-active dark:bg-bg-active-dark">0</div>
+                  <div
+                    class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
+                    0</div>
                 </x-sidenav-link>
               </li>
+              @foreach ($folders as $folder)
+                <li>
+                  <x-sidenav-link class="justify-between" href="{{ route('folders.show', $folder->id) }}"
+                    :active="request()->routeIs('folders.show') && request()->route('folderId') == $folder->id">
+                    <div class="flex items-center gap-2">
+                      <div class="h-4 w-4 rounded-[4px]" style="background-color: {{ $folder->color }};"></div>
+                      <span>{{ $folder->name }}</span>
+                    </div>
+                    <div
+                      class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
+                      0</div>
+                  </x-sidenav-link>
+                </li>
+              @endforeach
             </ul>
           </details>
         </li>
@@ -89,7 +115,7 @@
 
   <div class="py-0 dropdown dropdown-end dropdown-right">
     <div tabindex="0" role="button"
-      class="btn flex h-16 w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-border-secondry bg-bg-primary px-2 dark:border-border-secondry-dark dark:bg-bg-primary-dark">
+      class="btn flex h-16 w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-border-secondry bg-bg-primary px-2 hover:border-border-primary hover:bg-bg-active dark:border-border-secondry-dark dark:bg-bg-primary-dark hover:dark:border-border-primary-dark dark:hover:bg-bg-active-dark">
       <div class="flex gap-2">
         <div class="relative">
           <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->avatar_url }}" alt="User Avatar">
@@ -107,7 +133,7 @@
 
       <svg class="w-5 h-5" width="20" height="20" viewBox="0 0 24 24" fill="none"
         xmlns="http://www.w3.org/2000/svg">
-        <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="#94979C" stroke-width="2" stroke-linecap="round"
+        <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="#717680" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" />
       </svg>
     </div>
@@ -115,6 +141,11 @@
       class="menu dropdown-content z-[1] ml-2 w-40 rounded-[12px] border border-border-secondry bg-bg-primary p-2 shadow dark:border-border-secondry-dark dark:bg-bg-primary-dark">
       <li>
         <x-dropdown-link :href="route('profile.edit')">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#717680" class="size-5">
+            <path fill-rule="evenodd"
+              d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+              clip-rule="evenodd" />
+          </svg>
           Profile
         </x-dropdown-link>
       </li>
@@ -125,11 +156,18 @@
         <x-dropdown-link :href="route('logout')"
           onclick="event.preventDefault();
                               this.closest('form').submit();">
+
+          <svg class="w-5 h-5" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 17L21 12M21 12L16 7M21 12H9M9 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H9"
+              stroke="#717680" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           Log Out
         </x-dropdown-link>
+
       </form>
 
     </ul>
   </div>
-
 </nav>

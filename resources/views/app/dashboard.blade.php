@@ -1,4 +1,4 @@
-@section('titel', 'Dashboard')
+@section('title', 'Dashboard')
 
 <x-app-layout>
   <div class="py-12">

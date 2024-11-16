@@ -8,6 +8,12 @@ use App\Models\User;
 class Folder extends Model
 {
     //
+    protected $fillable = [
+        'name',
+        'color',
+        'user_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
