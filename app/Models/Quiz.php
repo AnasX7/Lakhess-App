@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    //
+
+    //! Change this.
+    protected $fillable = [
+        'title'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
