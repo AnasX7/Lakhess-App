@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Quiz;
-use App\Models\Summary;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -16,33 +14,43 @@ class SearchController extends Controller
 
         switch ($category) {
             case '':
-                //Do both
-                $summaryQuery = Summary::query()->where('title', 'LIKE', "%{$search}%");
-                $summaries = $summaryQuery->get();
-
-                $quizQuery = Quiz::query()
-                    ->where('title', 'LIKE', "%{$search}%");
-                $quizzes = $quizQuery->get();
+                foreach (auth()->user()->folders as $folder) {
+                    $folderSummaries = $folder->searchsummaries($search)->get();
+                    foreach ($folderSummaries as $summary) {
+                        array_push($summaries, $summary);
+                        $quizzesForSummary = $summary->searchQuiz($search)->get();
+                        foreach ($quizzesForSummary as $quiz) {
+                            array_push($quizzes, $quiz);
+                        }
+                    }
+                }
                 break;
 
             case 'summary':
-                //do summary
-                $summaryQuery = Summary::query()->where('title', 'LIKE', "%{$search}%");
-                $summaries = $summaryQuery->get();
+                foreach (auth()->user()->folders as $folder) {
+                    foreach ($folder->searchsummaries($search)->get() as $summary) {
+                        array_push($summaries, $summary);
+                    }
+                }
                 break;
 
             case 'quiz':
-                //do quiz
-                $quizQuery = Quiz::query()
-                    ->where('title', 'LIKE', "%{$search}%");
-                $quizzes = $quizQuery->get();
+                foreach (auth()->user()->folders as $folder) {
+                    foreach ($folder->summaries as $summary) {
+                        foreach ($summary->searchQuiz($search)->get() as $quiz) {
+                            array_push($quizzes, $quiz);
+                        }
+                    }
+                }
                 break;
 
             default:
-                //we don't want the user to continue with undefined catagory. so we abort
-                abort('404', 'category undefiend');
+                abort(404, 'Category undefined');
                 break;
         }
+
+
+        // dd($summaries, $quizzes);
 
         //We will store these in a session since we need to use it on the side-nav
         session()->flash('summaries', $summaries);

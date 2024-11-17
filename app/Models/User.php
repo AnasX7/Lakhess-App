@@ -56,22 +56,6 @@ class User extends AuthUser
         return $this->hasMany(Folder::class);
     }
 
-    /**
-     * Get the summaries associated with the user.
-     */
-    public function summaries()
-    {
-        return $this->hasMany(Summary::class);
-    }
-
-    /**
-     * Get the quizzes associated with the user.
-     */
-    public function quizzes()
-    {
-        return $this->hasMany(Quiz::class);
-    }
-
     public function getAvatarUrlAttribute()
     {
         return $this->avatar ? asset('avatars/' . $this->avatar) : asset('avatars/default.png');
