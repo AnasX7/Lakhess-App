@@ -19,8 +19,8 @@ class Summary extends Model
     }
 
 
-    public function favorites()
+    public function likedByUsers()
     {
-        return $this->morphMany(Favorite::class, 'favoritable');
+        return $this->belongsToMany(User::class, 'favorites');
     }
 }
