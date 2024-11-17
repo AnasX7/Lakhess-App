@@ -77,8 +77,10 @@ class User extends AuthUser
      */
     public function favorites()
     {
-        return $this->belongsToMany(Favorite::class, 'favorite_user', 'user_id', 'favorite_id');
+        return $this->belongsToMany(Summary::class, 'favorites');
     }
+
+
 
     public function getAvatarUrlAttribute()
     {
