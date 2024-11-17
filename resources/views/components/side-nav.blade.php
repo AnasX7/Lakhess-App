@@ -85,9 +85,8 @@
 
                                     foreach ($quizzes as $quiz) {
                                         // Check if the folder is already in the folders array
-
-                                        if (!in_array($quiz->summary->folder, $folders)) {
-                                            array_push($folders, $quiz->summary->folder);
+                                        if (!in_array($quiz->folder, $folders)) {
+                                            array_push($folders, $quiz->folder);
                                         }
                                     }
 

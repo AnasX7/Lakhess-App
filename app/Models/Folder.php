@@ -25,8 +25,9 @@ class Folder extends Model
         return $this->hasMany(Summary::class);
     }
 
-    public function searchsummaries(string $search)
+
+    public function quizzes()
     {
-        return $this->hasMany(Summary::class)->where('title', 'LIKE', "%{$search}%");
+        return $this->hasMany(Quiz::class);
     }
 }
