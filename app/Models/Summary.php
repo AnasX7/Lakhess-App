@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Summary extends Model
 {
-    // 
+    //
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -18,9 +18,13 @@ class Summary extends Model
         return $this->belongsTo(Folder::class);
     }
 
-
-    public function likedByUsers()
+    public function quiz()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->hasOne(Quiz::class);
+    }
+
+    public function searchQuiz(string $search)
+    {
+        return $this->hasOne(Quiz::class)->where('title', 'LIKE', "%{$search}%");
     }
 }
