@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/folders/{folderId}', [FolderController::class, 'show'])->name('folders.show');
 
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
+    Route::post('/summaries/create', [SummaryController::class, 'store'])->name('summaries.store');
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
     

@@ -3,7 +3,6 @@ import "./bootstrap";
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
 
-// dropzone();
 Alpine.plugin(collapse);
 
 Alpine.store("darkMode", {

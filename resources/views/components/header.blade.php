@@ -55,7 +55,7 @@
                         class="block font-medium text-sm/6 text-fg-secondry dark:text-fg-secondry-dark">Name</label>
                       <div class="mt-2">
                         <input type="text" name="folder_name" id="first-name" autocomplete="given-name"
-                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                          class="block w-full rounded-md border-1 py-1.5 border-gray-300 dark:border-gray-700 dark:bg-bg-primary-dark dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm sm:text-sm/6">
                       </div>
                     </div>
                     <div class="flex w-[100px] items-center justify-center">
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                   <input type="submit" value="Submit"
-                    class="text-white btn hover:bg-bg-secondry-dark dark:bg-bg-primary-dark" />
+                    class="text-white dark:text-fg-primary btn hover:bg-bg-secondry-dark dark:bg-gray-200 dark:hover:bg-bg-primary" />
                 </div>
               </form>
 
