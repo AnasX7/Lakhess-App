@@ -21,6 +21,6 @@ class Summary extends Model
 
     public function likedByUsers()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->belongsTo(User::class);
     }
 }

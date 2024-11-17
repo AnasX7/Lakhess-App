@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignId("folder_id")->constrained()->onDelete('cascade');
             $table->string("title");
             $table->text("content");
+            $table->boolean('favorite')->default(false);
             $table->timestamps();
         });
     }

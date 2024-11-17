@@ -72,16 +72,6 @@ class User extends AuthUser
         return $this->hasMany(Quiz::class);
     }
 
-    /**
-     * Get the user's favorites (using a pivot table).
-     */
-    public function favorites()
-    {
-        return $this->belongsToMany(Summary::class, 'favorites');
-    }
-
-
-
     public function getAvatarUrlAttribute()
     {
         return $this->avatar ? asset('avatars/' . $this->avatar) : asset('avatars/default.png');
