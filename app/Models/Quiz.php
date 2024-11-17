@@ -22,8 +22,8 @@ class Quiz extends Model
         return $this->belongsTo(Folder::class);
     }
 
-    public function favorites()
+    public function summary()
     {
-        return $this->morphMany(favorite::class, 'favoritable');
+        return $this->belongsTo(Summary::class);
     }
 }

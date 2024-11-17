@@ -7,7 +7,7 @@
             @switch($category)
                 @case('')
                     {{-- We do both --}}
-                    @if ($summaries->isEmpty() && $quizzes->isEmpty())
+                    @if (empty($summaries) && empty($quizzes))
                         <p class="justify-center text-xl">Nothing here...</p>
                     @else
                         @foreach ($summaries as $summary)
@@ -22,7 +22,7 @@
 
                 @case('summary')
                     {{-- Show summaries only --}}
-                    @if ($summaries->isEmpty())
+                    @if (empty($summaries))
                         <p class="justify-center text-xl">Nothing here...</p>
                     @else
                         @foreach ($summaries as $summary)
@@ -34,7 +34,7 @@
                 @case('quiz')
                     {{-- Show quizzes only --}}
 
-                    @if ($quizzes->isEmpty())
+                    @if (empty($quizzes))
                         <p class="justify-center text-xl">Nothing here...</p>
                     @else
                         @foreach ($quizzes as $quiz)
