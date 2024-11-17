@@ -25,6 +25,6 @@ class Summary extends Model
 
     public function searchQuiz(string $search)
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->hasOne(Quiz::class)->where('title','LIKE',"%{$search}%");
     }
 }

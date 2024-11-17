@@ -75,6 +75,7 @@
                                     //retrive the data from the session
                                     $summaries = session('summaries');
                                     $quizzes = session('quizzes');
+                                    $total = session('total');
 
                                     foreach ($summaries as $summary) {
                                         // Check if the folder is already in the folders array
@@ -106,7 +107,7 @@
                                             </div>
                                             <div
                                                 class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                                0</div>
+                                                {{ $total[$folder->id] }}</div>
                                         </x-sidenav-link>
                                     </li>
                                 @endforeach
@@ -158,7 +159,11 @@
                                             </div>
                                             <div
                                                 class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                                0</div>
+                                                {{ $folder->summaries->count() +
+                                                    $folder->summaries->sum(function ($summary) {
+                                                        return $summary->quiz->count();
+                                                    }) }}
+                                            </div>
                                         </x-sidenav-link>
                                     </li>
                                 @endforeach
