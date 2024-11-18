@@ -6,11 +6,12 @@
         <div class="flex flex-col justify-between w-full gap-6">
             <div class="flex items-center justify-between px-2">
 
-                <div class="flex items-center gap-[10px]">
-                    <x-application-logo class="h-[40px] w-[40px]" />
-                    <span class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
-                </div>
-
+        <a href="{{ route('dashboard') }}">
+          <div class="flex items-center gap-[10px]">
+            <x-application-logo class="h-[40px] w-[40px]" />
+            <span class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
+          </div>
+        </a>
                 <x-dark-mode-toggle />
 
             </div>

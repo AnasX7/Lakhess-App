@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/folders/{folderId}', [FolderController::class, 'destroy'])->name('folders.destroy');
 
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
+    Route::get('/summaries/{summaryId}', [SummaryController::class, 'show'])->name('summaries.show');
+    Route::post('/summaries/create', [SummaryController::class, 'generate'])->name('summaries.generate');
 
 
 

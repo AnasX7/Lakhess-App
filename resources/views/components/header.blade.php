@@ -82,8 +82,32 @@
                                 </div>
                             </form>
 
+              <form method="POST" action="{{ route('folders.store') }}">
+                @csrf
+                <div class="flex flex-col justify-between gap-4">
+                  <div class="flex items-center justify-between">
+                    <div class="w-full">
+                      <label for="folder-name"
+                        class="block font-medium text-sm/6 text-fg-secondry dark:text-fg-secondry-dark">Name</label>
+                      <div class="mt-2">
+                        <input type="text" name="folder_name" id="first-name" autocomplete="given-name" required
+                          class="block w-full rounded-md border-1 py-1.5 border-gray-300 dark:border-gray-700 dark:bg-bg-primary-dark dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm sm:text-sm/6">
+                      </div>
+                    </div>
+                    <div class="flex w-[100px] items-center justify-center">
+                      <div>
+                        <label for="folder-color"
+                          class="block font-medium text-sm/6 text-fg-secondry dark:text-fg-secondry-dark">Color</label>
+                        <div class="mt-2">
+                          <input type="color" name="folder_color"
+                            class="w-8 h-8 p-0 border-none rounded-lg appearance-none cursor-pointer" value="#8057DA" />
                         </div>
                     </div>
+
+                  </div>
+                  <input type="submit" value="Create"
+                    class="text-white dark:text-fg-primary btn hover:bg-bg-secondry-dark dark:bg-gray-200 dark:hover:bg-bg-primary" />
+
                 </div>
             </template>
         </div>

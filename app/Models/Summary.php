@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Summary extends Model
 {
-    //
-
+    // 
     protected $fillable = [
-        'favorite'
+        'title',
+        'content',
+        'folder_id',
+        'user_id',
+        'favorite',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

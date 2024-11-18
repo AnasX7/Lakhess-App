@@ -42,7 +42,6 @@ class FolderController extends Controller
         $folder->delete();
 
         return redirect()->route('dashboard')->with('success', 'Folder deleted successfully!');
-
     }
 
 }

@@ -1,9 +1,10 @@
 import "./bootstrap";
 
 import Alpine from "alpinejs";
+import focus from '@alpinejs/focus'
 import collapse from "@alpinejs/collapse";
 
-// dropzone();
+Alpine.plugin(focus);
 Alpine.plugin(collapse);
 
 Alpine.store("darkMode", {
