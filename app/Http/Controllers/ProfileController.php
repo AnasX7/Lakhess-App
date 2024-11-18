@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -34,7 +35,27 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('success', 'Profile updated successfully!');
+    }
+
+    /**
+     * Update the user's profile img.
+     */
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image',
+        ]);
+
+        if ($request->has('avatar')) {
+            $avatarpath = $request->file('avatar')->store('avatars', 'public');
+
+            Storage::disk('public')->delete(Auth()->user()->avatar ?? '');
+
+            Auth()->user()->update(['avatar' => $avatarpath]);
+        }
+
+        return redirect()->back()->with('success', 'Avatar updated successfully!');
     }
 
     /**
@@ -57,4 +78,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }

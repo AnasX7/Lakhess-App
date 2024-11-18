@@ -7,20 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 class Summary extends Model
 {
     // 
-     public function user (){
+    protected $fillable = [
+        'title',
+        'content',
+        'folder_id',
+        'user_id',
+        'favorite',
+    ];
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
-
     }
 
 
-    public function folder (){
+    public function folder()
+    {
         return $this->belongsTo(Folder::class);
-
     }
 
-
-    public function favorites (){
-        return $this->morphMany(Favorite::class, 'favoritable');
-
+    public function quiz()
+    {
+        return $this->hasOne(Quiz::class);
     }
 }

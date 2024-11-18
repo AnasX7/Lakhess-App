@@ -8,21 +8,25 @@ use App\Models\User;
 class Folder extends Model
 {
     //
-    public function user (){
+    protected $fillable = [
+        'name',
+        'color',
+        'user_id',
+    ];
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
-
     }
 
 
-    public function summaries (){
+    public function summaries()
+    {
         return $this->hasMany(Summary::class);
-
     }
 
-    
-    public function quizzes (){
-        return $this->hasMany(Quiz::class);
-
+    public function searchsummaries(string $search)
+    {
+        return $this->hasMany(Summary::class)->where('title', 'LIKE', "%{$search}%");
     }
-    
 }

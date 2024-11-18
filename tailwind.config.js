@@ -4,11 +4,14 @@ import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
+
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
     ],
+    
+    darkMode: "class",
 
     theme: {
         fontSize: {
@@ -55,14 +58,9 @@ export default {
                 "bg-active": "#FAFAFA",
                 "bg-secondry": "#FAFAFA",
                 "bg-primary-dark": "#0C0E12",
-                "bg-active-dark": "#22262F",
+                "bg-active-dark": "#14191e",
                 "bg-secondry-dark": "#13161B",
             },
-        },
-        darkMode: "selector",
-        backgroundImage:{
-            'grid-pattern':`linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px),
-                            linear-gradient (180deg,rgba(0,0,0,0.1) 1px,transparent 1px)`
         },
     },
 
