@@ -12,6 +12,7 @@ class Summary extends Model
         'content',
         'folder_id',
         'user_id',
+        'favorite',
     ];
 
     public function user()
@@ -25,9 +26,8 @@ class Summary extends Model
         return $this->belongsTo(Folder::class);
     }
 
-
-    public function likedByUsers()
+    public function quiz()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Quiz::class);
     }
 }

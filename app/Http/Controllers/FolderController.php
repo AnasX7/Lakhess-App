@@ -25,12 +25,23 @@ class FolderController extends Controller
         return redirect()->route('dashboard')->with('success', 'Folder created successfully!');
     }
 
-    public function show($folderId)
+    public function show(string $folderId)
     {
-        $folder = Folder::find($folderId);
-        $summaries = Folder::find($folderId)->summaries()->get();
+        $folder = Folder::findOrFail($folderId);
 
-        return view('app.folders', compact('folder','summaries'));
+        if ($folder->user->id !== auth()->user()->id) {
+            abort('403');
+        }
+
+        return view('app.folders', compact('folder'));
+    }
+
+    public function destroy(string $id)
+    {
+        $folder = Folder::findOrFail($id);
+        $folder->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Folder deleted successfully!');
     }
 
 }

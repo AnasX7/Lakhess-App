@@ -1,6 +1,7 @@
 @section('title', 'Folders')
 
 <x-app-layout>
+
   <div class="py-12">
     <div class="flex flex-col max-w-5xl gap-4 mx-auto sm:px-6 lg:px-8">
       @foreach ($summaries as $summary)
@@ -20,4 +21,23 @@
       @endforeach
     </div>
   </div>
+
+    Folder: {{ $folder->id }}
+    {{-- TESTING PURPOSES!! CHANGE LATER!! --}}
+    <div class="justify-end p-4">
+        <form action="{{ route('folders.destroy', $folder->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-primary">Delete Folder</button>
+        </form>
+    </div>
+    <div class="p-4">
+        <div class="flex flex-wrap gap-4">
+            @foreach ($folder->summaries as $summary)
+                @include('app.shared.summary-card')
+            @endforeach
+        </div>
+    </div>
+
 </x-app-layout>

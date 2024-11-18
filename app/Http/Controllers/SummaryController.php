@@ -80,8 +80,19 @@ class SummaryController extends Controller
         return trim($text);
     }
 
-    public function show($summaryId)
+    public function index()
     {
-        return view('app.summaries');
+        $summaries = [];
+
+        // Eager load summaries with folders
+        $folders = auth()->user()->folders()->with('summaries')->get();
+
+        foreach ($folders as $folder) {
+            foreach ($folder->summaries as $summary) {
+                $summaries[] = $summary; // Use shorthand for array push
+            }
+        }
+
+        return view('app.summaries', compact('summaries'));
     }
 }
