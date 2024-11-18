@@ -34,12 +34,11 @@ Route::middleware('auth')->group(function () {
         ]);
 
         $search = $validated['search'];
-        $category = $validated['category'] ?? '';
 
-        return redirect()->route('search.index', compact('search'))->with('category', $category ?? '');
+        return redirect()->route('search.index', compact('search'))->with('category');
     })->name('search');
 
-    Route::get('/search/{search}/{category?}', [SearchController::class, 'searching'])->name('search.index');
+    Route::get('/search/{search}', [SearchController::class, 'searching'])->name('search.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'upload'])->name('profile.upload');
