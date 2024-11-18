@@ -36,4 +36,13 @@ class FolderController extends Controller
         return view('app.folders', compact('folder'));
     }
 
+    public function destroy(string $id)
+    {
+        $folder = Folder::findOrFail($id);
+        $folder->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Folder deleted successfully!');
+
+    }
+
 }
