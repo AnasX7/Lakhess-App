@@ -14,7 +14,7 @@ class FolderController extends Controller
             'folder_name' => 'required|string|max:255',
             'folder_color' => 'required|string|size:7',
         ]);
-    
+
         Folder::create([
             'name' => $request->input('folder_name'),
             'color' => $request->input('folder_color'),
@@ -25,8 +25,12 @@ class FolderController extends Controller
         return redirect()->route('dashboard')->with('success', 'Folder created successfully!');
     }
 
-    public function show($folderId) {
-        return view('app.folders', compact('folderId'));
+    public function show($folderId)
+    {
+        $folder = Folder::find($folderId);
+        $summaries = Folder::find($folderId)->summaries()->get();
+
+        return view('app.folders', compact('folder','summaries'));
     }
 
 }
