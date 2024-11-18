@@ -126,7 +126,7 @@
                                         </div>
                                         <div
                                             class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                            {{ auth()->user()->folders->flatMap(function ($folder) {
+                                            {{ collect($folders)->flatMap(function ($folder) {
                                                     return $folder->summaries; // Get all summaries for each folder
                                                 })->sum('favorite') }}
                                         </div>

@@ -34,7 +34,7 @@ class FavoriteController extends Controller
             'favorite' => true
         ]);
 
-        return redirect()->route('favorites')->with('success', 'Favorite added!');
+        return redirect()->back()->with('success', 'Favorite added!');
     }
 
     public function uncheck(string $id)
@@ -45,6 +45,6 @@ class FavoriteController extends Controller
             'favorite' => false
         ]);
 
-        return redirect()->route('favorites')->with('success', 'Favorite removed!');
+        return redirect()->back()->with('success', 'Favorite removed!');
     }
 }
