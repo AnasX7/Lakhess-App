@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -46,12 +47,14 @@ class ProfileController extends Controller
             'avatar' => 'required|image',
         ]);
 
-        $avatarName = time().'.'.$request->avatar->getClientOriginalExtension();
+        if ($request->has('avatar')) {
+            $avatarpath = $request->file('avatar')->store('avatars', 'public');
 
-        $request->avatar->move(public_path('avatars'), $avatarName);
+            Storage::disk('public')->delete(Auth()->user()->avatar ?? '');
 
-        Auth()->user()->update(['avatar'=>$avatarName]);
-        
+            Auth()->user()->update(['avatar' => $avatarpath]);
+        }
+
         return redirect()->back()->with('success', 'Avatar updated successfully!');
     }
 

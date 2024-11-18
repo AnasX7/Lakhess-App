@@ -230,7 +230,9 @@
             class="btn flex h-16 w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-border-secondry bg-bg-primary px-2 hover:border-border-primary hover:bg-bg-active dark:border-border-secondry-dark dark:bg-bg-primary-dark hover:dark:border-border-primary-dark dark:hover:bg-bg-active-dark">
             <div class="flex gap-2">
                 <div class="relative">
-                    <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->avatar_url }}" alt="User Avatar">
+                    <img class="w-10 h-10 rounded-full"
+                        src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . urlencode(auth()->user()->name) }}"
+                        alt="User Avatar">
                     <span
                         class="absolute bottom-0 left-7 h-3.5 w-3.5 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                 </div>

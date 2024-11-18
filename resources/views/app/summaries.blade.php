@@ -1,6 +1,7 @@
 @section('title', 'Summaries')
 
 <x-app-layout>
+    {{-- TESTING PURPOSES!! CHANGE LATER!! --}}
     <div class="p-4">
         <div class="flex flex-wrap gap-4">
             @if (empty($summaries))

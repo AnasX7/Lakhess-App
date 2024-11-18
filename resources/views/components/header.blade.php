@@ -1,6 +1,8 @@
 <header class="flex items-center justify-between px-10 py-6">
     <div class="flex gap-4">
-        <img class="rounded-full h-14 w-14" src="{{ auth()->user()->avatar_url }}" alt="User Avatar">
+        <img class="rounded-full h-14 w-14"
+            src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . urlencode(auth()->user()->name) }}"
+            alt="User Avatar">
         <div class="flex flex-col">
             <span class="text-xl font-semibold text-fg-primary dark:text-fg-primary-dark">Welcome back,
                 {{ auth()->user()->name }}</span>
