@@ -10,6 +10,15 @@
         <p class="text-xs">{{ $summary->content }}</p>
         <div class="justify-end card-actions">
             <button class="btn btn-primary btn-sm">Read more</button>
+            @if (!$summary->favorite)
+                <a href="{{ route('favorites.check', $summary->id) }}">
+                    <button class="btn btn-secondary">add</button>
+                </a>
+            @else
+                <a href="{{ route('favorites.uncheck', $summary->id) }}">
+                    <button class="btn btn-secondary">remove</button>
+                </a>
+            @endif
         </div>
     </div>
 </div>
