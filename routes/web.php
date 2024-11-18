@@ -10,11 +10,14 @@ use App\Models\Quiz;
 use App\Models\Summary;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::view('/home', 'pages.home');
+Route::view('/', 'pages.home')->name('home');
+Route::view('/features', 'pages.features')->name('features');
+Route::view('/FAQ', 'pages.FAQ')->name('FAQ');
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
