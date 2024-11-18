@@ -74,7 +74,6 @@
 
                                     //retrive the data from the session
                                     $summaries = session('summaries');
-                                    $quizzes = session('quizzes');
                                     $total = session('total');
 
                                     foreach ($summaries as $summary) {
@@ -84,16 +83,55 @@
                                         }
                                     }
 
-                                    foreach ($quizzes as $quiz) {
-                                        // Check if the folder is already in the folders array
-
-                                        if (!in_array($quiz->summary->folder, $folders)) {
-                                            array_push($folders, $quiz->summary->folder);
-                                        }
-                                    }
-
                                 @endphp
 
+                                <li>
+                                    <x-sidenav-link class="justify-between" href="{{ route('summaries') }}"
+                                        :active="request()->routeIs('summaries')">
+                                        <div class="flex items-center gap-2">
+                                            <svg class="w-5 h-5" width="100%" height="100%" viewBox="0 0 24 24"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.49999 3L6.49999 21M17.5 3L14.5 21M20.5 8H3.5M19.5 16H2.5"
+                                                    stroke="#717680" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            <span>View all</span>
+                                        </div>
+                                        <div
+                                            class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
+                                            @php
+                                                $total_view = 0;
+                                                foreach ($folders as $folder) {
+                                                    foreach ($folder->summaries as $summary) {
+                                                        $total_view++;
+                                                    }
+                                                }
+                                                echo $total_view;
+                                            @endphp
+                                        </div>
+                                    </x-sidenav-link>
+                                </li>
+                                <li>
+                                    <x-sidenav-link class="justify-between" href="{{ route('favorites') }}"
+                                        :active="request()->routeIs('favorites')">
+                                        <div class="flex items-center gap-2">
+                                            <svg class="w-5 h-5" width="100%" height="100%" viewBox="0 0 24 24"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M16.1111 3C19.6333 3 22 6.3525 22 9.48C22 15.8138 12.1778 21 12 21C11.8222 21 2 15.8138 2 9.48C2 6.3525 4.36667 3 7.88889 3C9.91111 3 11.2333 4.02375 12 4.92375C12.7667 4.02375 14.0889 3 16.1111 3Z"
+                                                    stroke="#717680" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            <span>Favorite</span>
+                                        </div>
+                                        <div
+                                            class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
+                                            {{ auth()->user()->folders->flatMap(function ($folder) {
+                                                    return $folder->summaries; // Get all summaries for each folder
+                                                })->sum('favorite') }}
+                                        </div>
+                                    </x-sidenav-link>
+                                </li>
 
                                 @foreach ($folders as $folder)
                                     <li>
@@ -126,7 +164,17 @@
                                         </div>
                                         <div
                                             class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                            0</div>
+                                            @php
+                                                $folders = auth()->user()->folders;
+                                                $total_view = 0;
+                                                foreach ($folders as $folder) {
+                                                    foreach ($folder->summaries as $summary) {
+                                                        $total_view++;
+                                                    }
+                                                }
+                                                echo $total_view;
+                                            @endphp
+                                        </div>
                                     </x-sidenav-link>
                                 </li>
                                 <li>
@@ -144,7 +192,10 @@
                                         </div>
                                         <div
                                             class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                            0</div>
+                                            {{ auth()->user()->folders->flatMap(function ($folder) {
+                                                    return $folder->summaries; // Get all summaries for each folder
+                                                })->sum('favorite') }}
+                                        </div>
                                     </x-sidenav-link>
                                 </li>
                                 @foreach ($folders as $folder)
@@ -159,10 +210,7 @@
                                             </div>
                                             <div
                                                 class="border-1 badge badge-md border-border-primary bg-bg-active text-fg-tertiary dark:border-border-primary-dark dark:bg-bg-active-dark dark:text-fg-tertiary-dark">
-                                                {{ $folder->summaries->count() +
-                                                    $folder->summaries->sum(function ($summary) {
-                                                        return $summary->quiz->count();
-                                                    }) }}
+                                                {{ $folder->summaries->count() }}
                                             </div>
                                         </x-sidenav-link>
                                     </li>

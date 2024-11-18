@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+    Route::get('/favorites/{id}/check', [FavoriteController::class, 'check'])->name('favorites.check');
+    Route::get('/favorites/{id}/uncheck', [FavoriteController::class, 'uncheck'])->name('favorites.uncheck');
 
 
     //Search functionality
@@ -34,12 +36,11 @@ Route::middleware('auth')->group(function () {
         ]);
 
         $search = $validated['search'];
-        $category = $validated['category'] ?? '';
 
-        return redirect()->route('search.index', compact('search'))->with('category', $category ?? '');
+        return redirect()->route('search.index', compact('search'))->with('category');
     })->name('search');
 
-    Route::get('/search/{search}/{category?}', [SearchController::class, 'searching'])->name('search.index');
+    Route::get('/search/{search}', [SearchController::class, 'searching'])->name('search.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'upload'])->name('profile.upload');
