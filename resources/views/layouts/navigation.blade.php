@@ -27,7 +27,7 @@
                 </div>
 
                 @if (Route::has('login'))
-                    <div class="flex items-center">
+                    <div class="flex items-center gap-4 ">
                         @auth
                             <a href="{{ url('/dashboard') }}"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -35,13 +35,13 @@
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                class=" btn h-[40px] border-gray-200 bg-white text-black   hover:border-gray-200 hover:bg-white  hover:text-black rounded-[10px] border-[2px] px-3 py-2text-[18px] font-semibold ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Log in
                             </a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    class="btn border-primary bg-primary  hover:border-primary hover:bg-secondary rounded-[10px] border-[2px] px-3 py-2text-[18px] font-semibold text-[#FFFFFF] hover:text-[#FFFFFF] ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                     Register
                                 </a>
                             @endif
