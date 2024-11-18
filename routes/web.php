@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+    Route::get('/favorites/{id}/check', [FavoriteController::class, 'check'])->name('favorites.check');
+    Route::get('/favorites/{id}/uncheck', [FavoriteController::class, 'uncheck'])->name('favorites.uncheck');
 
 
     //Search functionality
