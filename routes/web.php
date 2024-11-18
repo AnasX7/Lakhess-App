@@ -21,8 +21,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::middleware('auth')->group(function () {
     Route::post('/folders', [FolderController::class, 'store'])->name('folders.store');
     Route::get('/folders/{folderId}', [FolderController::class, 'show'])->name('folders.show');
+    Route::delete('/folders/{folderId}', [FolderController::class, 'destroy'])->name('folders.destroy');
 
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
+
+
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
     Route::get('/favorites/{id}/check', [FavoriteController::class, 'check'])->name('favorites.check');
@@ -41,6 +44,7 @@ Route::middleware('auth')->group(function () {
     })->name('search');
 
     Route::get('/search/{search}', [SearchController::class, 'searching'])->name('search.index');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'upload'])->name('profile.upload');
