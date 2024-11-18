@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $folders = auth()->user()->folders()->get();
+        $folders = auth()->user()->folders;
 
         return view('app.dashboard', compact('folders'));
     }
