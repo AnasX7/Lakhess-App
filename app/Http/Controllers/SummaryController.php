@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use OpenAI\Laravel\Facades\OpenAI;
 use Smalot\PdfParser\Parser;
 use App\Models\Summary;
@@ -53,7 +54,6 @@ class SummaryController extends Controller
 
             // Save the summary in the database
             $summary = Summary::create([
-                'user_id' => auth()->id(),
                 'title' => $request->input('title'),
                 'content' => $summaryText,
                 'folder_id' => $request->input('folder_id'),
@@ -94,5 +94,12 @@ class SummaryController extends Controller
         }
 
         return view('app.summaries', compact('summaries'));
+    }
+
+    public function export(string $id)
+    {
+        $summary = Summary::findOrFail($id);
+        $pdf = Pdf::loadView('app.export.summary-pdf', compact('summary'));
+        return $pdf->download('invoice.pdf');
     }
 }
