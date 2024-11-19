@@ -1,8 +1,8 @@
-<div id="navbar" class="mt-1 fixed top-0 mx-auto w-full">
+<div id="navbar" class="fixed top-0 w-full mx-auto mt-1 z-[9999]">
     <nav x-data="{ open: false }"
         class="bg-white border-b rounded-2xl mt-[10px] dark:bg-gray-800 dark:border-gray-700 w-[75%] mx-auto border-[1px] border-border-primary ">
         <!-- Primary Navigation Menu -->
-        <div class="px-4  w-full  mx-auto sm:px-6 lg:px-8">
+        <div class="w-full px-4 mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <!-- Logo -->
