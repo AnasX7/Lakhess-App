@@ -27,6 +27,8 @@ class SearchController extends Controller
         session()->flash('summaries', $summaries);
         session()->flash('total', $total_folder_count);
 
+        
+
         return view('app.search', compact('summaries'));
     }
 }
