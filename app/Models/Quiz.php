@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-
-    //! Change this.
     protected $fillable = [
-        'title'
+        'title',
+        'questions',
+        'summary_id'
     ];
 
     public function user()

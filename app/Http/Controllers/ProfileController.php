@@ -47,12 +47,14 @@ class ProfileController extends Controller
             'avatar' => 'required|image',
         ]);
 
-        if ($request->has('avatar')) {
+        if ($request->has('avatar') && $request->file('avatar')->isValid()) {
             $avatarpath = $request->file('avatar')->store('avatars', 'public');
 
             Storage::disk('public')->delete(Auth()->user()->avatar ?? '');
 
             Auth()->user()->update(['avatar' => $avatarpath]);
+        } else {
+            return redirect()->back()->withErrors(['avatar' => 'File upload failed or no file selected.']);
         }
 
         return redirect()->back()->with('success', 'Avatar updated successfully!');

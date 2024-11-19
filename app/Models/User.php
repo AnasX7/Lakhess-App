@@ -58,7 +58,7 @@ class User extends AuthUser
 
     public function getAvatarUrlAttribute()
     {
-        return $this->avatar ? asset('storage/' . $this->avatar) : 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . urlencode(auth()->user()->name);
+        return auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . urlencode(auth()->user()->name);
     }
 
 }
