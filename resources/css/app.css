@@ -13,12 +13,17 @@
     scroll-behavior: smooth;
 }
 
-.markdown-content h1, 
-.markdown-content h2, 
-.markdown-content p, 
-.markdown-content ul, 
-.markdown-content li {
-    color: var(--tw-text-opacity) !important;
+#navbar{
+    transition: transform 1s ease;
+}
+
+#navbar.scroll-up{
+    transform: translate3d(0,0,0);
+}
+
+#navbar.scroll-down{
+    transform: translate3d(0,-10rem,0);
+
 }
 
 #grid {

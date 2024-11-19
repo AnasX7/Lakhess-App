@@ -6,12 +6,13 @@
         <div class="flex flex-col justify-between w-full gap-6">
             <div class="flex items-center justify-between px-2">
 
-        <a href="{{ route('dashboard') }}">
-          <div class="flex items-center gap-[10px]">
-            <x-application-logo class="h-[40px] w-[40px]" />
-            <span class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
-          </div>
-        </a>
+                <a href="{{ route('dashboard') }}">
+                    <div class="flex items-center gap-[10px]">
+                        <x-application-logo class="h-[40px] w-[40px]" />
+                        <span
+                            class="font-zain text-2xl font-[900] text-fg-primary dark:text-fg-primary-dark">Lakhess</span>
+                    </div>
+                </a>
                 <x-dark-mode-toggle />
 
             </div>
@@ -231,8 +232,7 @@
             class="btn flex h-16 w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-border-secondry bg-bg-primary px-2 hover:border-border-primary hover:bg-bg-active dark:border-border-secondry-dark dark:bg-bg-primary-dark hover:dark:border-border-primary-dark dark:hover:bg-bg-active-dark">
             <div class="flex gap-2">
                 <div class="relative">
-                    <img class="w-10 h-10 rounded-full"
-                        src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . urlencode(auth()->user()->name) }}"
+                    <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->getAvatarUrlAttribute() }}"
                         alt="User Avatar">
                     <span
                         class="absolute bottom-0 left-7 h-3.5 w-3.5 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>

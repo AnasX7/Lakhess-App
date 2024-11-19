@@ -10,11 +10,14 @@ use App\Models\Quiz;
 use App\Models\Summary;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::view('/home', 'pages.home');
+Route::view('/', 'pages.home')->name('home');
+Route::view('/features', 'pages.features')->name('features');
+Route::view('/FAQ', 'pages.FAQ')->name('FAQ');
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -26,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/summaries', [SummaryController::class, 'index'])->name('summaries');
     Route::get('/summaries/{summaryId}', [SummaryController::class, 'show'])->name('summaries.show');
     Route::post('/summaries/create', [SummaryController::class, 'generate'])->name('summaries.generate');
+    Route::get('/summaries/{id}/export', [SummaryController::class, 'export'])->name('summaries.export');
 
 
 
