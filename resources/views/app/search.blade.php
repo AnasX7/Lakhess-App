@@ -1,16 +1,17 @@
-@section('title', 'Folders')
+@section('title', 'Search')
 
 <x-app-layout>
-    {{-- TESTING PURPOSES!! CHANGE LATER!! --}}
-    <div class="p-4">
-        <div class="flex flex-wrap gap-4">
-            @if (empty($summaries))
-                <p class="justify-center text-xl">Nothing here...</p>
-            @else
-                @foreach ($summaries as $summary)
-                    @include('app.shared.summary-card')
-                @endforeach
-            @endif
-        </div>
+
+  <div class="py-12">
+    <div class="flex flex-col max-w-5xl gap-2 mx-auto sm:px-6 lg:px-8">
+      @if (empty($summaries))
+        <p class="justify-center text-xl">Nothing here...</p>
+      @else
+        @foreach ($summaries as $summary)
+          @include('app.shared.summary-card')
+        @endforeach
+      @endif
     </div>
+  </div>
+  
 </x-app-layout>

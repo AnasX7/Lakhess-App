@@ -13,6 +13,14 @@
     scroll-behavior: smooth;
 }
 
+.markdown-content h1, 
+.markdown-content h2, 
+.markdown-content p, 
+.markdown-content ul, 
+.markdown-content li {
+    color: var(--tw-text-opacity) !important;
+}
+
 #grid {
     background-color: #FFFFFF;
     background-image: linear-gradient(90deg,rgba(0,0,0,0.1)1px,transparent 1px),

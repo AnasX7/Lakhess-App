@@ -20,6 +20,10 @@ class SummaryController extends Controller
         ]);
 
         try {
+            if ($request->input('folder_id') === null) {
+                return redirect()->route('dashboard')->with('error', 'Select a folder.');
+            }
+
             // Parse the PDF file
             $filePath = $request->file('file')->getPathname();
             $pdfParser = new Parser();
@@ -28,10 +32,8 @@ class SummaryController extends Controller
             // Extract text from the PDF
             $pdfText = $pdf->getText();
 
-            // dd($pdfText);
-
             if (empty(trim($pdfText))) {
-                return response()->json(['error' => 'Unable to extract text from the PDF.'], 400);
+                return redirect()->route('dashboard')->with('error', 'Unable to extract text from the PDF.');
             }
 
             // Simplify the text
@@ -42,18 +44,19 @@ class SummaryController extends Controller
                 'model' => 'gpt-4o-mini',
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a helpful assistant that summarizes text.'],
-                    ['role' => 'user', 'content' => 'Summarize this: ' . $simplifiedText],
+                    ['role' => 'user', 'content' => 'Summarize this lecture in a comprehensive manner covering all its aspects in an organized and coordinated way: ' . $simplifiedText],
                 ],
-                'max_tokens' => 1500,
+                'max_tokens' => 10000,
                 'temperature' => 0.7,
             ]);
 
             // Extract the summary text from the API response
             $summaryText = $response['choices'][0]['message']['content'] ?? 'Unable to generate summary.';
 
+
+
             // Save the summary in the database
             $summary = Summary::create([
-                'user_id' => auth()->id(),
                 'title' => $request->input('title'),
                 'content' => $summaryText,
                 'folder_id' => $request->input('folder_id'),
@@ -78,6 +81,13 @@ class SummaryController extends Controller
         $text = preg_replace('/\s+/', ' ', $text);
 
         return trim($text);
+    }
+
+    public function show($summaryId)
+    {
+        $summary = Summary::findOrFail($summaryId);
+
+        return view('app.summary', compact('summary'));
     }
 
     public function index()
