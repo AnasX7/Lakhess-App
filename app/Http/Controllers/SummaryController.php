@@ -45,7 +45,7 @@ class SummaryController extends Controller
                 'model' => 'gpt-4o-mini',
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a helpful assistant that summarizes text.'],
-                    ['role' => 'user', 'content' => 'Summarize this lecture in a comprehensive manner covering all its aspects in an organized and coordinated way: ' . $simplifiedText],
+                    ['role' => 'user', 'content' => 'Summarize this lecture in a comprehensive manner covering all its aspects in an organized and coordinated way. but spaces between periodes: ' . $simplifiedText],
                 ],
                 'max_tokens' => 10000,
                 'temperature' => 0.7,
@@ -73,6 +73,33 @@ class SummaryController extends Controller
 
     }
 
+    public function generateQuiz(Summary $summary, Request $request)
+    {
+        try {
+            // Call OpenAI API to generate summary
+            $response = OpenAI::chat()->create([
+                'model' => 'gpt-4o-mini',
+                'messages' => [
+                    ['role' => 'system', 'content' => 'You are a helpful assistant that summarizes text.'],
+                    ['role' => 'user', 'content' => 'Make a quiz out of this lecture in a comprehensive manner covering all its aspects in an organized and coordinated way. put spaces between periodes,add answers but put some symbol so we can sperate it into question and answer using regex: ' . $summary->content],
+                ],
+                'max_tokens' => 10000,
+                'temperature' => 0.7,
+            ]);
+
+            // Extract the quiz text from the API response
+            $quizText = $response['choices'][0]['message']['content'] ?? 'Unable to generate summary.';
+
+            return $quizText;
+
+            // return redirect()->route('folders.show', $summary->folder_id)
+            //     ->with('success', 'Summary created successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('summaries.show', $summary->id)->with('error', 'Failed to process the file or generate summary. Please try again.');
+        }
+
+    }
+
     private function simplifyText(string $text): string
     {
         // Step 1: Remove common unnecessary sections
@@ -84,9 +111,43 @@ class SummaryController extends Controller
         return trim($text);
     }
 
+    public function storeQuiz($summaryId, Request $request)
+    {
+        $summary = Summary::findOrFail($summaryId);
+
+        $quizText = $this->generateQuiz($summary, $request);
+
+        $summary->quiz()->create([
+            'title' => $summary->title . ' - Quiz',
+            'questions' => $quizText,
+            'summary_id' => $summary->id
+        ]);
+
+        return redirect()->route('summaries.show', $summary->id)->with('success', 'Quiz created successfully!');
+
+        // $summary->quiz()->create([
+        //     'questions'
+        // ])
+    }
+
+
+    public function showQuiz($summaryId)
+    {
+        $summary = Summary::findOrFail($summaryId);
+
+        $quiz = $summary->quiz;
+
+        return view('app.quiz', compact('quiz'));
+    }
+
+
     public function show($summaryId)
     {
         $summary = Summary::findOrFail($summaryId);
+
+        $quiz = $summary->quiz ?? '';
+
+        session()->flash('quiz', $quiz);
 
         return view('app.summary', compact('summary'));
     }
@@ -111,6 +172,6 @@ class SummaryController extends Controller
     {
         $summary = Summary::findOrFail($id);
         $pdf = Pdf::loadView('app.export.summary-pdf', compact('summary'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($summary->title . '.pdf');
     }
 }

@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/summaries/create', [SummaryController::class, 'generate'])->name('summaries.generate');
     Route::get('/summaries/{id}/export', [SummaryController::class, 'export'])->name('summaries.export');
 
+    Route::get('/summaries/{id}/quiz', [SummaryController::class, 'showQuiz'])->name('summaries.showQuiz');
+    Route::post('/summaries/{id}/quiz', [SummaryController::class, 'storeQuiz'])->name('summaries.storeQuiz');
+
 
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');

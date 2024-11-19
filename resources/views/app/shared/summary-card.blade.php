@@ -1,13 +1,13 @@
 <a href="{{ route('summaries.show', $summary->id) }}" class="w-full">
   <div
-    class="flex w-full items-center justify-between rounded-lg border border-border-primary bg-bg-active px-4 py-3 dark:border-border-primary-dark dark:bg-bg-active-dark">
+    class="flex items-center justify-between w-full px-4 py-3 border rounded-lg border-border-primary bg-bg-active dark:border-border-primary-dark dark:bg-bg-active-dark">
     <div class="flex items-center gap-10">
       <div class="h-5 w-5 rounded-[4px]"
         style="background-color: {{ \App\Models\Folder::find($summary->folder_id)->color }};"></div>
       <span class="text-base font-semibold text-fg-secondry dark:text-fg-secondry-dark">{{ $summary->title }}</span>
     </div>
 
-    <div>
+    <div class="flex gap-3">
       @if (!$summary->favorite)
         <a href="{{ route('favorites.check', $summary->id) }}">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,6 +25,13 @@
           </svg>
         </a>
       @endif
+
+      <a href="{{ route('summaries.export', $summary->id) }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 21H21M12 3V17M12 17L19 10M12 17L5 10" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
     </div>
   </div>
 </a>

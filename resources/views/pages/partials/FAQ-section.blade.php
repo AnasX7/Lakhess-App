@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center gap-10 mb-20">
+<section class="flex flex-col items-center gap-10 pb-20 bg-bg-primary">
 
     <div class="flex flex-col items-center gap-2 px-20">
         <h2 class="text-xl font-bold text-primary">FAQ</h2>
@@ -170,8 +170,8 @@
         </div>
     </div>
 
-    <div class=" flex flex-col max-w-5xl  w-full justify-center items-center gap-6 bg-bg-active py-2  ">
-        <div class="avatar-group -space-x-6 rtl:space-x-reverse pt-4  ">
+    <div class="flex flex-col items-center justify-center w-full max-w-5xl gap-6 py-2 bg-bg-active">
+        <div class="pt-4 -space-x-6 avatar-group rtl:space-x-reverse ">
            
             <div class="avatar">
                 <div class="w-16 h-16 overflow-hidden rounded-full ">
@@ -201,10 +201,10 @@
 
         </div>  
         <div class="flex flex-col items-center gap-3">
-            <h3 class="text-black font-bold">Still Have Question?</h3>
+            <h3 class="font-bold text-black">Still Have Question?</h3>
             <p class="text-gray-400"> Can't Find The Answer You're looking For? Pleas Chat To Our Frindly Team.  </p>
         </div>
-        <a class="btn btn-active bg-primary border-primary text-white hover:bg-primary hover:border-primary my-3 "  href=" mailto:anasssalem.aa@gmail.com">Get in touch</a>
+        <a class="my-3 text-white btn btn-active bg-primary border-primary hover:bg-primary hover:border-primary "  href=" mailto:anasssalem.aa@gmail.com">Get in touch</a>
     </div>
 
 
